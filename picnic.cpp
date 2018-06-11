@@ -49,7 +49,7 @@ vector<int> pairTable;
 int totalCount = 0;
 
 //vector<int *> seqList(100);
-vector<int> seqTemp;
+vector<int> *seqTemp;
 
 void checkInput(int nStudent, int nPair, vector<int> v)
 {
@@ -93,7 +93,7 @@ void searchPair(vector<int> &pairTable) {
 		if (student[a] == 0 && student[b] == 0) {
 			student[a] = 1;
 			student[b] = 1;
-			seqTemp.push_back(index);
+			seqTemp->push_back(index);
 			//cout << index << ",";
 			//cout << "student : " << student[0] << student[1] << student[2] << student[3] << student[4] << student[5] << endl;
 		}
@@ -145,7 +145,8 @@ int main()
 		vector<int> tempTable = pairTable;
 		for (int index = 0 ; index < nPair ; index++) {
 			//cout << "!!!!!!!!!! index : " << index << endl;
-			seqTemp.push_back(index);
+			seqTemp = new vector<int>;
+			seqTemp->push_back(index);
 			
 			pairA = tempTable.back();
 			tempTable.pop_back();
@@ -154,9 +155,9 @@ int main()
 			//cout << index << ",";
 			searchPair(pairTable);
 			
-			sort(seqTemp.begin(), seqTemp.end());
-			printVector(seqTemp);
-			seqTemp.clear();
+			//sort(seqTemp.begin(), seqTemp.end());
+			printVector(*seqTemp);
+			seqTemp->clear();
 		}
 		cout << totalCount << endl;
 	}
