@@ -102,7 +102,7 @@ void searchPair(vector<int> &pairTable) {
 		index += 1;
 
 	} // end of pair
-	cout << "\n";
+	//cout << "\n";
 
 	for (int i = 0 ; i < nStudent ; i++) {
 		flag = flag && student[i];
@@ -111,11 +111,31 @@ void searchPair(vector<int> &pairTable) {
 	if (flag == 1) {
 		//TODO
 		//sort를 진행해서 index sequence가 기존에 없는 경우에만 totalCount를 늘린다.
-		totalCount += 1;
-		cout << "student : " << student[0] << student[1] << student[2] << student[3] << student[4] << student[5] << endl;
+
+		//cout << "student : " << student[0] << student[1] << student[2] << student[3] << student[4] << student[5] << endl;
 		
 		sort(seqTemp->begin(), seqTemp->end());
-		seqList.push_back(seqTemp);
+
+		////TODO
+		if (seqList.empty()) { 
+			seqList.push_back(seqTemp);
+			totalCount += 1;
+		}
+
+		int isFound = 0;
+		vector<vector<int> *>::iterator it = seqList.begin();
+		for ( it = seqList.begin() ; it != seqList.end() ; ++it ){
+			if ( (**it) == *seqTemp ) {
+				isFound = 1;
+				break;
+			}
+			//printVector(**it);
+			//cout <<"\n";
+		}
+		if (isFound == 0 ) {
+			seqList.push_back(seqTemp);
+			totalCount += 1;
+		};
 		//cout << "totalCount: " << totalCount << endl;
 	}
 	for (int i = 0 ; i < 100 ; i++) {
@@ -142,7 +162,7 @@ int main()
 		}
 
         //checkInput(nStudent, nPair, pairTable);
-        cout << "\n" << endl;
+        //cout << "\n" << endl;
 
 		
 		vector<int> tempTable = pairTable;
@@ -159,14 +179,10 @@ int main()
 			searchPair(pairTable);
 			
 			//sort(seqTemp.begin(), seqTemp.end());
-			vector<vector<int> *>::iterator it = seqList.begin();
-			for ( it = seqList.begin() ; it != seqList.end() ; ++it ){
-				printVector(**it);
-				cout <<"\n";
-			}
+
 			//seqTemp->clear();
 		}
-		cout << totalCount << endl;
+		cout << totalCount << "\n";
 		seqList.clear();
 	}
 
