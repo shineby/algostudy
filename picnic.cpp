@@ -59,7 +59,7 @@ void checkInput(int nStudent, int nPair, vector<int> v)
     for (iter = v.begin() ; iter != v.end() ; ++iter)
         cout << *iter << " ";
     cout << "\n";
-};
+}
 
 void printVector(vector<int> v) 
 {
@@ -146,7 +146,7 @@ void searchPair(vector<int> &pairTable) {
 	//pairTable.pop_back();
 	//pairTable.pop_back();
 	//searchPair(pairTable);
-};
+}
 
 int main()
 {
