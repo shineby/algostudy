@@ -39,6 +39,7 @@
 using namespace std;
 
 int cases;
+int case_index = 0;
 int nStudent;
 int nPair;
 int pairA, pairB;
@@ -46,7 +47,7 @@ int temp;
 int flag = 1;
 int student[100] = {0, };
 vector<int> pairTable;
-int totalCount = 0;
+int totalCount[100] = {0,};
 
 vector<vector<int> *> seqList;
 vector<int> *seqTemp;
@@ -119,7 +120,7 @@ void searchPair(vector<int> &pairTable) {
 		////TODO
 		if (seqList.empty()) { 
 			seqList.push_back(seqTemp);
-			totalCount += 1;
+			totalCount[case_index] += 1;
 		}
 
 		int isFound = 0;
@@ -134,7 +135,7 @@ void searchPair(vector<int> &pairTable) {
 		}
 		if (isFound == 0 ) {
 			seqList.push_back(seqTemp);
-			totalCount += 1;
+			totalCount[case_index] += 1;
 		};
 		//cout << "totalCount: " << totalCount << endl;
 	}
@@ -150,8 +151,8 @@ void searchPair(vector<int> &pairTable) {
 int main()
 {
 	cin >> cases;
-	while(cases--) {
-		totalCount = 0;
+	while( case_index < cases) {
+		totalCount[case_index] = 0;
 
 		pairTable.clear();
 		cin >> nStudent >> nPair;
@@ -182,10 +183,12 @@ int main()
 
 			//seqTemp->clear();
 		}
-		cout << totalCount << "\n";
-		seqList.clear();
-	}
 
+		seqList.clear();
+		case_index ++;
+	}
+	for (int index = 0 ; index < cases ; index ++)
+		cout << totalCount[index] << "\n";
 	return 0;
 
 }
