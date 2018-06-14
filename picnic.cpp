@@ -33,8 +33,6 @@
 #include<string>
 #include<vector>
 #include<algorithm>
-//(std::find(vector.begin(), vector.end(), item) != vector.end())
-// true, false
 
 using namespace std;
 
@@ -71,15 +69,12 @@ void printVector(vector<int> v)
 void searchPair(vector<int> &pairTable) {
 
 
-	//if (pairTable.empty()) return;
-
 
 	vector<int>::reverse_iterator rit ;
-	//for (int index = 0 ; index < nPair ; index++) {
 	student[pairA] =1;
 	student[pairB] = 1;
 	int index = 0;
-	//cout << "student : " << student[0] << student[1] << student[2] << student[3] << student[4] << student[5] << endl;
+
 	for (rit = pairTable.rbegin() ; rit != pairTable.rend() ; rit++){
 
 		flag = 1;
@@ -87,23 +82,18 @@ void searchPair(vector<int> &pairTable) {
 		int a = *rit;
 		++rit;
 		int b = *rit;
-		//cout << " => " << a << ", " << b << endl;
 
 		// map update
-
 		if (student[a] == 0 && student[b] == 0) {
 			student[a] = 1;
 			student[b] = 1;
 			seqTemp->push_back(index);
-			//cout << index << ",";
-			//cout << "student : " << student[0] << student[1] << student[2] << student[3] << student[4] << student[5] << endl;
 		}
 
 
 		index += 1;
 
 	} // end of pair
-	//cout << "\n";
 
 	for (int i = 0 ; i < nStudent ; i++) {
 		flag = flag && student[i];
@@ -112,8 +102,6 @@ void searchPair(vector<int> &pairTable) {
 	if (flag == 1) {
 		//TODO
 		//sort를 진행해서 index sequence가 기존에 없는 경우에만 totalCount를 늘린다.
-
-		//cout << "student : " << student[0] << student[1] << student[2] << student[3] << student[4] << student[5] << endl;
 		
 		sort(seqTemp->begin(), seqTemp->end());
 
@@ -137,15 +125,11 @@ void searchPair(vector<int> &pairTable) {
 			seqList.push_back(seqTemp);
 			totalCount[case_index] += 1;
 		};
-		//cout << "totalCount: " << totalCount << endl;
 	}
 	for (int i = 0 ; i < 100 ; i++) {
 		student[i] = 0;
 	}
 
-	//pairTable.pop_back();
-	//pairTable.pop_back();
-	//searchPair(pairTable);
 }
 
 int main()
@@ -162,8 +146,7 @@ int main()
 			pairTable.push_back(temp);
 		}
 
-        //checkInput(nStudent, nPair, pairTable);
-        //cout << "\n" << endl;
+ 	//checkInput(nStudent, nPair, pairTable);
 
 		
 		vector<int> tempTable = pairTable;
@@ -176,17 +159,17 @@ int main()
 			tempTable.pop_back();
 			pairB = tempTable.back();
 			tempTable.pop_back();
-			//cout << index << ",";
+			
 			searchPair(pairTable);
 			
 			//sort(seqTemp.begin(), seqTemp.end());
-
 			//seqTemp->clear();
 		}
 
 		seqList.clear();
 		case_index ++;
 	}
+
 	for (int index = 0 ; index < cases ; index ++)
 		cout << totalCount[index] << "\n";
 	return 0;
