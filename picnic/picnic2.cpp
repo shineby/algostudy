@@ -31,15 +31,25 @@ class CheckFriends{
 				pairTable[friendA][friendB] = 1;
 				pairTable[friendB][friendA] = 1;
 			}
+
 		}
 		void searchFriend(void) {
 			
+
 		}
 
 		void printResult(void) {
 			cout << totalCount << "\n";
 		}
 
+		void printTable(void){
+			for (int i = 0 ; i < studentNum ; i++) {
+				cout << "\n";
+				for (int j = 0 ; j < studentNum ; j++)
+					cout << pairTable[i][j];
+			}
+			cout << "\n";	
+		}
 };
 
 int main(void) {
@@ -51,6 +61,7 @@ int main(void) {
 	while (testCases--) {
 		sf.inputData();
 		sf.searchFriend();	
+		sf.printTable();
 		sf.printResult();
 	}
 }
