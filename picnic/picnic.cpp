@@ -64,6 +64,7 @@ void printVector(vector<int> v)
     vector<int>::iterator iter = v.begin();	
     for (iter = v.begin() ; iter != v.end() ; ++iter)
         cout << *iter << " ";
+	cout << "\n";
 }
 
 void searchPair(vector<int> &pairTable) {
@@ -110,21 +111,24 @@ void searchPair(vector<int> &pairTable) {
 		if (seqList.empty()) { 
 			seqList.push_back(seqTemp);
 			totalCount[case_index] += 1;
+			//printVector(*seqTemp);									
 		}
 
 		int isFound = 0;
 		vector<vector<int> *>::iterator it = seqList.begin();
 		for ( it = seqList.begin() ; it != seqList.end() ; ++it ){
+			
 			if ( (**it) == *seqTemp ) {
 				isFound = 1;
 				break;
 			}
-			//printVector(**it);
-			//cout <<"\n";
+
+			
 		}
 		if (isFound == 0 ) {
 			seqList.push_back(seqTemp);
 			totalCount[case_index] += 1;
+			//printVector(*seqTemp);						
 		}
 	}
 	for (int i = 0 ; i < 2000 ; i++) {
@@ -136,11 +140,14 @@ void searchPair(vector<int> &pairTable) {
 int main()
 {
 	cin >> cases;
+	if (cases < 1)
+		cout << 0 << "\n";
 	while( case_index < cases) {
 		totalCount[case_index] = 0;
 
 		pairTable.clear();
-		cin >> nStudent >> nPair;
+		cin >> nStudent;
+		cin >> nPair;
 		for (int i = 0; i < (nPair * 2); i++) {
 			cin >> temp;
 			//cout << "temp : " << temp << "\n";
@@ -177,7 +184,7 @@ int main()
 	}
 
 	for (int index = 0 ; index < cases ; index ++)
-		cout << totalCount[index] << endl;
+		cout << totalCount[index] << "\n";
 	return 0;
 
 }
