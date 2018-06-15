@@ -33,8 +33,16 @@ class CheckFriends{
 			}
 
 		}
-		void searchFriend(void) {
-			
+		void searchFriend(int start = 0) {
+			//checkTable
+			//pairTable
+
+			for (int i = 0 ; i < studentNum ; i++)
+				for (int j = i+1; j < studentNum; j++) {
+					
+					
+					//cout << i << ", " << j << "\n";
+				}
 
 		}
 
@@ -61,7 +69,7 @@ int main(void) {
 	while (testCases--) {
 		sf.inputData();
 		sf.searchFriend();	
-		sf.printTable();
+		//sf.printTable();
 		sf.printResult();
 	}
 }
