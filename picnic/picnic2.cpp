@@ -11,13 +11,14 @@ class CheckFriends{
 		int pairNum;
 
 		int totalCount;
+		int foundCnt;
 	public:
 		void inputData(void){
 			// initialize 
 			memset(pairTable, 0, sizeof(int)*10*10);
 			memset(checkTable, 0, sizeof(int)*10);
 			totalCount = 0;
-
+			foundCnt = 0;
 
 			cin >> studentNum;
 			cin >> pairNum;
@@ -37,11 +38,26 @@ class CheckFriends{
 			//checkTable
 			//pairTable
 
-			for (int i = 0 ; i < studentNum ; i++)
+			for (int i = start ; i < studentNum ; i++)
 				for (int j = i+1; j < studentNum; j++) {
-					
-					
 					//cout << i << ", " << j << "\n";
+					
+					if (checkTable[i] ==0 && checkTable[j] == 0 && pairTable[i][j]) {
+						//cout << "found \n";
+						checkTable[i] = 1;
+						checkTable[j] = 1;
+						foundCnt++;
+					        //cout << "funcCnt: " << foundCnt << "\n";	
+						searchFriend(i+1);
+					
+						if (foundCnt == studentNum/2)
+							totalCount++;
+						checkTable[i] = 0;
+						checkTable[j] = 0;
+						foundCnt--;
+					}
+
+					
 				}
 
 		}
