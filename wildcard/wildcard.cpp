@@ -45,7 +45,6 @@ void WILDCARD::inputData()
 
 		if (m_data.empty()) {continue;}
 		m_data.append("\n");
-		cout << m_data.length() << endl;
 		verifyData(0, 0);
 	}
 }
@@ -55,8 +54,6 @@ void WILDCARD::verifyData(unsigned int wIndex, unsigned int dIndex)
 	//TODO
 	// exit condition
 
-	cout << "wIndex : " << wIndex << endl;
-	cout << "dIndex : " << dIndex << endl;
 
 	if (wIndex >= m_wildcard.length() ) {
 		if (dIndex >= m_data.length()) {
@@ -64,22 +61,21 @@ void WILDCARD::verifyData(unsigned int wIndex, unsigned int dIndex)
 			return;
 		} else return;
 	}
+	if (dIndex >= m_data.length()) {
+		while (m_wildcard.at(wIndex) != '*') {
+				cout << "dddd: ";
+				wIndex++;
+		}
+	}
 
-	if (m_wildcard.at(wIndex) == '*' ) {
-		cout << "case 1" << endl;
 
-		cout << m_wildcard.at(wIndex) << endl;
-		cout << m_data.at(dIndex) << endl;
+	if (m_wildcard.at(wIndex) == '*' && dIndex < m_data.length()-1) {
 		wIndex++;
 		dIndex++;
-		cout << "wIndex 1: " << wIndex << endl;
-		cout << "dIndex 1: " << dIndex << endl;
+
 		while (m_wildcard.at(wIndex) != m_data.at(dIndex) && dIndex < m_data.length()) {
-				cout << "dddd: ";
 				dIndex++;
 		}
-		cout << "wIndex 2: " << wIndex << endl;
-		cout << "dIndex 2: " << dIndex << endl;
 		verifyData(wIndex, dIndex);
 		//wIndex++;
 	} else {
@@ -88,9 +84,6 @@ void WILDCARD::verifyData(unsigned int wIndex, unsigned int dIndex)
 			++dIndex;
 			verifyData(wIndex, dIndex);
 		} else if (m_wildcard.at(wIndex) == m_data.at(dIndex)) {
-			cout << m_wildcard.at(wIndex);
-			cout << m_data.at(dIndex);
-			cout << "case 3" << endl;
 			++wIndex;
 			++dIndex;
 			verifyData(wIndex, dIndex);
