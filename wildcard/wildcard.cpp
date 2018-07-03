@@ -69,11 +69,11 @@ void WILDCARD::verifyData(unsigned int wIndex, unsigned int dIndex)
 	}
 
 
-	if (m_wildcard.at(wIndex) == '*' && dIndex < m_data.length()-1) {
+	if ((m_wildcard.at(wIndex) == '*') && (dIndex < m_data.length()-1) ) {
 		wIndex++;
 		dIndex++;
 
-		while (m_wildcard.at(wIndex) != m_data.at(dIndex) && dIndex < m_data.length()) {
+		while (m_wildcard.at(wIndex) != m_data.at(dIndex) && dIndex < m_data.length()-1) {
 				dIndex++;
 		}
 		verifyData(wIndex, dIndex);
@@ -88,7 +88,7 @@ void WILDCARD::verifyData(unsigned int wIndex, unsigned int dIndex)
 			++dIndex;
 			verifyData(wIndex, dIndex);
 		} else {
-			//wIndex = m_wildcard.length() + 1;
+			wIndex = m_wildcard.length() - 1;
 		}
 	}
 
