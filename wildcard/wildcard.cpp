@@ -65,7 +65,6 @@ void WILDCARD::inputData()
 	cin >> m_ntest;
 
 
-	if (m_wildcard.empty()) { exit(0); }
 
 	//cout << "wildcard : " <<  m_wildcard << endl;
 
@@ -112,7 +111,7 @@ void WILDCARD::verifyData(unsigned int wIndex, unsigned int dIndex)
 		verifyData(wIndex, dIndex);
 		//wIndex++;
 	} else {
-		if  (m_wildcard.at(wIndex) == '?') {
+		if  (m_wildcard.at(wIndex) == '?' && dIndex < m_data.length()-1) {
 			++wIndex;
 			++dIndex;
 			verifyData(wIndex, dIndex);
