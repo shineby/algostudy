@@ -54,7 +54,8 @@ void WILDCARD::init(void)
 	m_wildcard.clear();
 	m_data.clear();
 	m_nresult = 0;
-	memset(m_result, 0, sizeof(m_result));
+	for (int i = 0 ; i < 50 ; i++)
+		m_result[i].clear();
 }
 
 void WILDCARD::inputData()
@@ -94,7 +95,7 @@ void WILDCARD::verifyData(unsigned int wIndex, unsigned int dIndex)
 		} else return;
 	}
 	if (dIndex >= m_data.length()-1) {
-		while (m_wildcard.at(wIndex) == '*') {
+		while (m_wildcard.at(wIndex) == '*' && wIndex < m_wildcard.length()) {
 				//cout << "wIndex: " << wIndex << endl;
 				wIndex++;
 		}
@@ -115,7 +116,7 @@ void WILDCARD::verifyData(unsigned int wIndex, unsigned int dIndex)
 			++wIndex;
 			++dIndex;
 			verifyData(wIndex, dIndex);
-		} else if (m_wildcard.at(wIndex) == m_data.at(dIndex)) {
+		} else if (m_wildcard.at(wIndex) == m_data.at(dIndex) && dIndex < m_data.length()-1) {
 			++wIndex;
 			++dIndex;
 			verifyData(wIndex, dIndex);
@@ -141,7 +142,6 @@ int main(void)
 		wildcard.init();
 		wildcard.inputData();
 		wildcard.sortResult();
-		cout << "-----------" << endl;
 		wildcard.printResult();
 	}
 
