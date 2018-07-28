@@ -33,6 +33,12 @@ public:
 		_temp = 0;
 	}
 
+	void init(void) {
+		nLunchBox = 0;
+		totalRun = INT_MAX;
+		heatedBox = 0;
+		_temp = 0;
+	}
 
 	void inputHeatTime() {
 		int _heatTime = 0;
@@ -56,6 +62,12 @@ public:
 	int doMW(int start = 0) {
 		//TODO
 		//do microwave
+		int tempFinal = 0;
+		if (start == 0)
+			tempFinal = totalRun + boxList[start-1].eatTime;	
+		else
+			tempFinal = totalRun + boxList[0].eatTime;
+		if (tempFinal > totalRun) {return 0;}
 		if (heatedBox >= nLunchBox){
 			
 			if (_temp < totalRun) {
@@ -70,6 +82,7 @@ public:
 		for (int i = start; i < nLunchBox ; i++) {
 				
 				_temp = _temp + boxList[i].heatTime;
+				
 				heatedBox++;
 				doMW(i+1);	
 				heatedBox--;
@@ -96,6 +109,7 @@ int main(void) {
 	MW mw;
 	cin >> testCases;
 	while (testCases--){
+		mw.init();
 		int _nLunchBox = 0;
 		cin >> _nLunchBox;
 		mw.nLunchBox = _nLunchBox;
