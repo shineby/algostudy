@@ -23,13 +23,17 @@ int PackItem::getVolume(void) {}
 
 class CarrierBox {
 public:
-	CarrierBox( int _maxItem, int _maxVol): maxItem(_maxItem) , maxVol(_maxVol) {};
 	int maxVol;
 	int maxItem;
 	PackItem itemList[100];
+	
+
+	CarrierBox( int _maxItem, int _maxVol): maxItem(_maxItem) , maxVol(_maxVol) {};
 	void setMaxVolume(int _volume);
 	void setItem(PackItem _item);
-
+	void showInfo(void) {
+		cout << "MaxItem : " << maxItem << " MaxVol : " << maxVol << endl;
+	}
 };
 
 class PackCarrier {
@@ -43,12 +47,16 @@ public:
 int main(void) {
 	int testCases = 0;
 
+	cin >> testCases;
 	while (testCases--){
 		int maxItem = 0;
 		int maxVol = 0 ;
 		cin >> maxItem;
 		cin >> maxVol;
-		PackCarrier pc( CarrierBox(maxItem, maxVol) );
+
+		CarrierBox cb = CarrierBox(maxItem, maxVol);
+		cb.showInfo();
+		PackCarrier pc( cb );
 
 
 	}
