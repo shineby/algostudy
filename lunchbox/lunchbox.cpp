@@ -63,9 +63,16 @@ public:
 		//TODO
 		//do microwave
 		int tempFinal = 0;
+		
+
 		if (start =! 0)
 			tempFinal = totalRun + boxList[start-1].eatTime;	
 		if (tempFinal > totalRun) {return 0;}
+		
+		if (nLunchBox == 1){
+			totalRun = boxList[0].eatTime + boxList[0].heatTime;
+			return 0;
+		}
 		if (heatedBox >= nLunchBox){
 			
 			if (_temp < totalRun) {
@@ -78,14 +85,12 @@ public:
 		}
 	
 		for (int i = start; i < nLunchBox ; i++) {
-			for (int j = i+1 ; j <nLunchBox; j++) {		
 				_temp = _temp + boxList[i].heatTime;
 				heatedBox++;
 				doMW(i+1);	
 				heatedBox--;
 						
 				//TODO
-			}
 		}
 		
 	}
