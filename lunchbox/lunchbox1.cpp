@@ -82,7 +82,7 @@ public:
 			
 			if (_temp < totalRun) {
 				//cout << "start: " << start << endl; 
-				totalRun = _temp + boxList[start-1].eatTime; 
+				totalRun = _temp + boxList[start].eatTime; 
 			}
 			_temp = 0;
 			return 0;
@@ -97,7 +97,7 @@ public:
 				doMW(i);	
 				heatedBoxMap[i] = 0;
 				nheatedBox--;
-						
+				_temp = _temp - boxList[i].heatTime;				
 			}
 		}
 		
