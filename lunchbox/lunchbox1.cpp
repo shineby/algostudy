@@ -19,25 +19,27 @@ public:
 class MW {
 public:
 	LunchBox boxList[10001];
+	int heatedBoxMap[10001];
 	int nLunchBox;
 	int totalRun;
 	int totalEat;
-	int heatedBox;
+	int nheatedBox;
 	int _temp;
 
 
 	MW() {
 		nLunchBox = 0;
 		totalRun = INT_MAX;
-		heatedBox = 0;
+		nheatedBox = 0;
 		_temp = 0;
 	}
 
 	void init(void) {
 		nLunchBox = 0;
 		totalRun = INT_MAX;
-		heatedBox = 0;
+		nheatedBox = 0;
 		_temp = 0;
+		memset(heatedBoxMap, 0, sizeof(heatedBoxMap));
 	}
 
 	void inputHeatTime() {
@@ -76,7 +78,7 @@ public:
 			totalRun = boxList[0].eatTime + boxList[0].heatTime;
 			return 0;
 		}
-		if (heatedBox >= nLunchBox){
+		if (nheatedBox >= nLunchBox){
 			
 			if (_temp < totalRun) {
 				//cout << "start: " << start << endl; 
@@ -87,13 +89,16 @@ public:
 
 		}
 	
-		for (int i = start; i < nLunchBox ; i++) {
+		for (int i = 0; i < nLunchBox ; i++) {
+			if (heatedBoxMap[i] == 0) {
 				_temp = _temp + boxList[i].heatTime;
-				heatedBox++;
-				doMW(i+1);	
-				heatedBox--;
+				nheatedBox++;
+				heatedBoxMap[i] = 1;
+				doMW(i);	
+				heatedBoxMap[i] = 0;
+				nheatedBox--;
 						
-				//TODO
+			}
 		}
 		
 	}
