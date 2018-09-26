@@ -19,6 +19,7 @@ typedef struct _totalEat {
 	int heatTime;
 	int eatTime;
 	int sum(void) {
+		//cout << "heatTime: " << heatTime << ", " << "eatTime: " << eatTime << endl;
 		return heatTime + eatTime;
 	}
 } TotalTime;
@@ -37,7 +38,8 @@ public:
 	LunchBox boxList[10001];
 	int nLunchBox;
 	int nheatedBox;
-	TotalTime totalRun;
+	TotalTime totalRun = {};
+	TotalTime maxTotalRun = {};
 	int _temp;
 
 
@@ -50,7 +52,10 @@ public:
 	void init(void) {
 		nLunchBox = 0;
 		nheatedBox = 0;
+		totalRun = {};
+		maxTotalRun = {};
 		_temp = 0;
+		memset(boxList, 0, sizeof(boxList));
 		//memset(heatedBoxMap, 0, sizeof(heatedBoxMap));
 	}
 
@@ -77,7 +82,22 @@ public:
 	int doMW(int start = 0) {
 		//TODO
 		//do microwave
+		// 1. exit criteria
+		if (nheatedBox == nLunchBox)
+			return 1;
 		
+
+		for (int i = start; i < nLunchBox ; i++) {
+			
+			totalRun.eatTime = boxList[i].eatTime;
+			totalRun.heatTime += boxList[i].heatTime;
+
+			if ( maxTotalRun.sum() < totalRun.sum() ) {
+				maxTotalRun.heatTime = totalRun.heatTime;
+				maxTotalRun.eatTime = totalRun.eatTime;
+			}			
+		}
+
 	}
 	void sortBox(void  ) {
 		//TODO 
@@ -110,11 +130,11 @@ int main(void) {
 		mw.nLunchBox = _nLunchBox;
 		mw.inputHeatTime();		
 		mw.inputEatTime();
-		mw.printBoxList();
+		//mw.printBoxList();
 		mw.sortBox();
-		mw.printBoxList();
+		//mw.printBoxList();
 		mw.doMW();
-		//cout << mw.totalRun.sum() << endl;
+		cout << mw.maxTotalRun.sum() << endl;
 		
 		
 
