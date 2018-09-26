@@ -56,22 +56,76 @@ H×W 크기의 게임판과 한 가지 모양의 블록이 여러 개 있습니�
 */
 #include <iostream>
 #include <string>
+#include <cstring>
 
 using namespace std;
 static const int NUM_TC_MAX = 50;
 
 typedef struct _board {
-    int w;
-    int h;
-} board;
+    int w,h,r,c = 0;
+    char boardMap[10][10] = {'.',};
+    char blkMap[10][10] = {'.',};
+
+    void init() {
+        memset(boardMap, 0, sizeof(boardMap));
+        memset(blkMap, 0, sizeof(blkMap));
+        w = 0;
+        h = 0;
+        r = 0;
+        w = 0;
+    }
+
+    void inputBoard(void) {
+        for (int j = 0; j < h; j++)
+            for (int i = 0; i < w; i++) {
+                cin >> boardMap[i][j];
+            }
+
+    }
+
+    void inputBlk(void) {
+        for (int j = 0; j < r; j++)
+            for (int i = 0; i < c; i++) {
+                cin >> blkMap[i][j];
+            }
+
+    }
+
+    void printMap(void){   
+         for (int j = 0; j < h; j++) {
+            for (int i = 0; i < w; i++) {
+                cout << boardMap[i][j] ;
+            }       
+            cout << "\n";
+        }
+    }
+
+    void printBlk(void){   
+         for (int j = 0; j < r; j++) {
+            for (int i = 0; i < c; i++) {
+                cout << blkMap[i][j] ;
+            }       
+            cout << "\n";
+        }
+    }
+} BOARD;
 
 
 
 int main() {
-    board brd;
-    std::cin >> brd.h;
-    std::cin >> brd.w;
+    BOARD brd;
+    int testcases =0 ;
+    cin >> testcases;
+    while(testcases--) {
+        cin >> brd.h;
+        cin >> brd.w;
+        cin >> brd.r;        
+        cin >> brd.c;
+        brd.inputBoard();   
+        //brd.printMap();
+        brd.inputBlk();
+        //brd.printBlk();
 
-    std::cout << brd.h << "," << brd.w << std::endl; 
+    }
     return 1;
 }
